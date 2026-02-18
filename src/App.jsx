@@ -3,7 +3,7 @@ import axios from 'axios';
 import { User, Mail, Lock, LogIn, UserPlus, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const API_URL = import.meta.env.VITE_API_ORIGIN || 'http://localhost:5000/api';
+const API_URL = '/api';
 
 const AuthApp = () => {
   const [isLogin, setIsLogin] = useState(true);
