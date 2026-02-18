@@ -41,7 +41,8 @@ const AuthApp = () => {
       }, 2000);
     } catch (err) {
       console.error('Registration/Login error:', err);
-      const errorMsg = err.response?.data?.error ||
+      const errorMsg = err.response?.data?.details ||
+        err.response?.data?.error ||
         err.response?.data?.message ||
         (err.code === 'ERR_NETWORK' ? 'Network error: Cannot reach the server. Please check if the backend is running.' : 'Something went wrong. Please try again.');
 

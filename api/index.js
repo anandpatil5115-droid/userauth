@@ -73,8 +73,12 @@ app.post('/api/register', async (req, res) => {
 
         res.status(201).json({ message: 'User registered successfully!', user: newUser.rows[0] });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error during registration.' });
+        console.error('Registration Error:', err);
+        res.status(500).json({
+            error: 'Server error during registration.',
+            details: err.message,
+            hint: 'Check if DB environment variables are set in Vercel'
+        });
     }
 });
 
