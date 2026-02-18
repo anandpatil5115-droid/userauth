@@ -3,7 +3,7 @@ import axios from 'axios';
 import { User, Mail, Lock, LogIn, UserPlus, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_ORIGIN || 'http://localhost:5000/api';
 
 const AuthApp = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -40,9 +40,14 @@ const AuthApp = () => {
         window.location.href = 'https://webmovies-two.vercel.app/';
       }, 2000);
     } catch (err) {
+      console.error('Registration/Login error:', err);
+      const errorMsg = err.response?.data?.error ||
+        err.response?.data?.message ||
+        (err.code === 'ERR_NETWORK' ? 'Network error: Cannot reach the server. Please check if the backend is running.' : 'Something went wrong. Please try again.');
+
       setMessage({
         type: 'error',
-        text: err.response?.data?.error || 'Something went wrong. Please try again.'
+        text: errorMsg
       });
     } finally {
       setLoading(false);
