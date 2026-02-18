@@ -35,11 +35,10 @@ const AuthApp = () => {
 
       setMessage({ type: 'success', text: response.data.message });
 
-      if (isLogin) {
-        console.log('Login Success:', response.data.user);
-      } else {
-        setTimeout(() => setIsLogin(true), 2000);
-      }
+      // Redirect logic
+      setTimeout(() => {
+        window.location.href = 'https://webmovies-two.vercel.app/';
+      }, 2000);
     } catch (err) {
       setMessage({
         type: 'error',
@@ -76,8 +75,8 @@ const AuthApp = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               className={`mb-6 p-4 rounded-xl flex items-center gap-3 text-sm font-medium border ${message.type === 'success'
-                  ? 'bg-green-500/10 border-green-500/20 text-green-400'
-                  : 'bg-red-500/10 border-red-500/20 text-red-400'
+                ? 'bg-green-500/10 border-green-500/20 text-green-400'
+                : 'bg-red-500/10 border-red-500/20 text-red-400'
                 }`}
             >
               {message.type === 'success' ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
