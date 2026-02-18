@@ -53,7 +53,16 @@ initDb();
 
 // Health Check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', message: 'Backend is running on Vercel' });
+    res.json({
+        status: 'ok',
+        message: 'Backend is running on Vercel',
+        config: {
+            host: process.env.DB_HOST ? `${process.env.DB_HOST.substring(0, 5)}...` : 'not set',
+            port: process.env.DB_PORT || 'not set',
+            database: process.env.DB_NAME ? `${process.env.DB_NAME.substring(0, 3)}...` : 'not set',
+            hasPassword: !!process.env.DB_PASSWORD
+        }
+    });
 });
 
 // Registration Endpoint
