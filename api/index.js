@@ -1,8 +1,11 @@
-const express = require('express');
-const { Pool } = require('pg');
-const bcrypt = require('bcryptjs');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import pkg from 'pg';
+const { Pool } = pkg;
+import bcrypt from 'bcryptjs';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -40,6 +43,11 @@ const initDb = async () => {
 };
 
 initDb();
+
+// Health Check
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'Backend is running on Vercel' });
+});
 
 // Registration Endpoint
 app.post('/api/register', async (req, res) => {
@@ -104,4 +112,4 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-module.exports = app;
+export default app;
